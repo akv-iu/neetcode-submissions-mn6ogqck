@@ -1,0 +1,37 @@
+from collections import defaultdict
+class TimeMap:
+    
+
+    def __init__(self):
+        self.store = {}
+        
+
+    def set(self, key: str, value: str, timestamp: int) -> None:
+        if key not in self.store:
+            self.store[key] = []
+        self.store[key].append([value,timestamp])
+
+
+        
+
+    def get(self, key: str, timestamp: int) -> str:
+        if key not in self.store:
+            return 
+        l = 0
+        r = len(self.store[key]) - 1
+        print(l,r)
+        
+        while l < r:
+            mid = (l+r) // 2
+
+            if self.store[key][mid][1] > timestamp:
+                r = mid - 1
+            elif self.store[key][mid][1] < timestamp:
+                l = mid + 1
+            else:
+                return self.store[key][mid][0]
+        print(self.store[key][l][1])
+        if self.store[key][l][1] <= timestamp:
+            return self.store[key][l][0]
+        else:
+            return
